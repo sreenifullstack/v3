@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGL Scene</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #canvas-container {
+        flex: 2; /* Canvas takes more space */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+
+      #controls {
+        flex: 1; /* Controls take less space */
+        overflow-y: auto;
+        padding: 15px;
+        background-color: #ffffff;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin: 10px 0;
+        font-size: 1.2em;
+      }
+
+      .section {
+        margin-bottom: 20px;
+      }
+
+      .section h3 {
+        margin: 5px 0;
+        font-size: 1em;
+        cursor: pointer;
+        background-color: #ddd;
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .section-content {
+        display: none; /* Collapsed by default */
+        padding-left: 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="range"],
+      select {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .control-group {
+        margin-bottom: 15px;
+      }
+    </style>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div id="canvas-container">
+      <canvas width="800" height="600"></canvas>
+    </div>
+
+    <div id="controls">
+      <h2>Controls</h2>
+
+      <!-- Camera Controls -->
+      <div class="section">
+        <h3>Camera Controls</h3>
+        <div class="section-content">
+          <label for="cameraSelect">Select Camera:</label>
+          <select id="cameraSelect">
+            <option value="main">Main Camera</option>
+            <option selected value="animate">Animated Camera</option>
+          </select>
+
+          <h3>Main Camera Position</h3>
+          <label for="xAxis">X:</label>
+          <input
+            type="range"
+            id="xAxis"
+            min="-10"
+            max="10"
+            step="0.1"
+            value="0"
+          />
+          <label for="yAxis">Y:</label>
+          <input
+            type="range"
+            id="yAxis"
+            min="-10"
+            max="10"
+            step="0.1"
+            value="3"
+          />
+          <label for="zAxis">Z:</label>
+          <input
+            type="range"
+            id="zAxis"
+            min="-20"
+            max="0"
+            step="0.1"
+            value="-7"
+          />
+
+          <h3>Camera Settings</h3>
+          <label for="fov">Field of View:</label>
+          <input type="range" id="fov" min="30" max="120" step="1" value="45" />
+
+          <h3>Camera Target</h3>
+          <label for="targetX">Target X:</label>
+          <input
+            type="range"
+            id="targetX"
+            min="-10"
+            max="10"
+            step="0.1"
+            value="0"
+          />
+          <label for="targetY">Target Y:</label>
+          <input
+            type="range"
+            id="targetY"
+            min="-10"
+            max="10"
+            step="0.1"
+            value="0"
+          />
+          <label for="targetZ">Target Z:</label>
+          <input
+            type="range"
+            id="targetZ"
+            min="-10"
+            max="10"
+            step="0.1"
+            value="0"
+          />
+
+          <h3>Camera Up Vector</h3>
+          <label for="upX">Up X:</label>
+          <input type="range" id="upX" min="-1" max="1" step="0.1" value="0" />
+          <label for="upY">Up Y:</label>
+          <input type="range" id="upY" min="-1" max="1" step="0.1" value="1" />
+          <label for="upZ">Up Z:</label>
+          <input type="range" id="upZ" min="-1" max="1" step="0.1" value="0" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Toggle section visibility
+      document.querySelectorAll(".section h3").forEach((header) => {
+        header.addEventListener("click", () => {
+          const content = header.nextElementSibling;
+          content.style.display =
+            content.style.display === "none" ? "block" : "none";
+        });
+      });
+
+      // Expand all sections on load
+      document.querySelectorAll(".section-content").forEach((content) => {
+        content.style.display = "block";
+      });
+    </script>
+  </body>
+</html>
