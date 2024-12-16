@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/css-modules": "^1.0.5",
     "gl-matrix": "^3.4.3",
     "mat4": "^0.0.4",
     "mv-redux": "^0.1.9"
